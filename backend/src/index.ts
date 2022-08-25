@@ -10,15 +10,26 @@ const PORT = 3000;
 
 
 
-console.log(files)
-app.post('/', (req, res) => {
+app.post('/set', (req, res) => {
   const data = req.body;
-  files.push(data);
+  const dataURL = files.filter(item => item.route === data.route)
+  if(dataURL.length === 0) {
+    files.push(data);
+    res.json({ok: true, url: `https://3000-franciscojefer-urlshort-zyhc8q8rlej.ws-us63.gitpod.io/${data.route}`})
+    console.log(files)
+    return
+  }
+  res.status(400).send('Esta rota já existe!')
 })
 
-app.post('/url', (req, res) => {
-  console.log(req.body)
-  //res.send()
+app.get('/:route', (req, res) => {
+  const route = req.params.route;
+  const dataURL = files.filter(item => item.route === route)
+  if(dataURL.length > 0) {
+    res.redirect(dataURL[0].origin)
+    return 
+  }
+  res.send('Not found!')
 })
 
 

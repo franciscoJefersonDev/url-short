@@ -18,6 +18,7 @@
 }
 
 :root {
+	--ripple-color: rgba(0, 0, 0, 0.2);
 	--bg-color: 255, 255, 255;
 	--bg-primary: 241, 166, 97;
 	--primary: 241, 166, 97;
@@ -29,6 +30,7 @@
 
 @media (prefers-color-scheme: dark) {
 	:root {
+		--ripple-color: rgba(255, 255, 255, 0.2);
 		--bg-color: 40, 40, 40;
 		--bg-alert: rgb(65, 65, 65);
 		--text-color: 255, 255, 255;

@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
   import { AddManualBtnsAnim } from '../webkit-components/buttonsAnimated';
   import { AddManualRipples } from '../webkit-components/ripples';
+	import axios from 'axios';
 	import Load from '../lib/Load.svelte';
 
 	const cdnImport = [
@@ -12,6 +13,14 @@
 	let isLoading = true;
 	let isLoaded = false;
 	let isResult = false;
+	let URLOrigin = '';
+	let URLRoute = '';
+	const validate = () => {
+		axios.post('https://3000-franciscojefer-urlshort-zyhc8q8rlej.ws-us63.gitpod.io/', {
+			origin: URLOrigin,
+			route: URLRoute,
+		}).then( response =>console.log(response)).catch(erro => console.log(error))
+	}
 	let msgLoading = 'Carregando...';
 	const addAnimations = () => {
 		const btnsAnimated: any = document.querySelectorAll<HTMLButtonElement>('.btn-anim')!;
@@ -43,16 +52,16 @@
 				<h1 class="text-h1">Encurtador de URL</h1>
 				<div class="form-input">
 					<label for="url-origin">URL original:</label>
-					<input type="text" class="wk-input-text text-left" id="url-origin" placeholder="URL original...">
+					<input type="text" class="wk-input-text text-left" bind:value={URLOrigin} id="url-origin" placeholder="URL original...">
 				</div>
 				<div class="form-input url-short">
 					<label for="url-short">Rota da URL encurtada:</label>
 					<div class="flex">
 						<input type="text" class="wk-input-text text-left domain" value="https://myDomain/" readonly>
-						<input type="text" class="wk-input-text text-left" id="url-short" placeholder="Rota da URL encurtada...">
+						<input type="text" class="wk-input-text text-left" id="url-short" placeholder="Rota..." bind:value={URLRoute}>
 					</div>
 				</div>
-				<button class="wk-btn btn-anim ripples" on:click={() => isResult = !isResult}>
+				<button class="wk-btn btn-anim ripples"  on:click={validate}>
 					<ion-icon name="refresh-outline"></ion-icon>
 					Gerar URL encurtada
 				</button>
@@ -150,7 +159,7 @@
 				width: 100%;
 				--brd-radius: 1em;
 				--brd-color: rgba(var(--text-color), 0.2);
-				--brd-size: 0.1em;
+				--brd-size: 0.09em;
 				--ph-color: rgb(var(--primary));
 				--select-color: rgb(var(--primary));
 				--select-color-text: rgb(255, 255, 255);

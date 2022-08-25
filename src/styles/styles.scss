@@ -24,7 +24,8 @@
 	--primary: 241, 166, 97;
 	--bg-alert: rgb(230, 230, 230);
 	--brd-radius: 1em;
-	--fs: 1.05em;
+	--fs: 1.03em;
+	--ph-fs: 0.9em;
 	--text-color: 0, 0, 0;
 }
 
@@ -62,5 +63,5 @@ body {
 
 .text-h1 {
 	font-weight: 600;
-	font-size: clamp(1.3em, calc(var(--fs) + 1.5vw), 2.5em);
+	font-size: clamp(1em, calc(var(--fs) + 1vw), 2em);
 }
